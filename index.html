@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quantum Mega Bot | All Unlocked</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.5rem; }
+        .emerald-glow { color: #10b981; text-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
+        .btn-active { background: #10b981 !important; color: white !important; font-weight: 800; }
+        input { outline: none; }
+    </style>
+</head>
+<body class="p-4 md:p-10 flex flex-col items-center pb-20">
+
+    <div class="w-full max-w-md">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6 px-2">
+            <div class="flex items-center gap-2">
+                <div class="bg-emerald-500 p-2 rounded-lg shadow-lg">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                </div>
+                <h1 class="text-xl font-extrabold tracking-tighter uppercase italic">Mega<span class="text-emerald-500">.Bot</span></h1>
+            </div>
+            <div id="status-tag" class="bg-red-500/10 text-red-500 px-3 py-1 rounded-full text-[9px] font-black uppercase border border-red-500/20">Offline</div>
+        </div>
+
+        <!-- Profit & Stats Card -->
+        <div class="glass p-6 mb-6 shadow-2xl border-t border-emerald-500/20 text-center">
+            <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Session Profit / Loss</p>
+            <div id="total-pl" class="text-5xl font-black tracking-tighter text-white">$0.00</div>
+            <div class="flex justify-center gap-6 mt-4 pt-4 border-t border-white/5">
+                <div>
+                    <p class="text-[8px] font-bold text-slate-500 uppercase">Wins</p>
+                    <p id="win-count" class="text-lg font-bold text-emerald-500">0</p>
+                </div>
+                <div>
+                    <p class="text-[8px] font-bold text-slate-500 uppercase">Losses</p>
+                    <p id="loss-count" class="text-lg font-bold text-red-500">0</p>
+                </div>
+                <div>
+                    <p class="text-[8px] font-bold text-slate-500 uppercase">Balance</p>
+                    <p id="balance" class="text-lg font-bold text-white">$0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bot Pulse Display -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="glass p-6 text-center border-b-4 border-emerald-500">
+                <p class="text-[9px] text-slate-500 font-bold uppercase mb-2">London Digit</p>
+                <div id="digit" class="text-7xl font-black emerald-glow">-</div>
+            </div>
+            <div class="glass p-6 text-center border-b-4 border-slate-700">
+                <p class="text-[9px] text-slate-500 font-bold uppercase mb-2">V-Losses</p>
+                <div class="flex justify-center items-baseline gap-1">
+                    <span id="vloss" class="text-7xl font-black">0</span>
+                    <span id="vlimit-display" class="text-slate-600 text-lg font-bold">/3</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEGA BOT SELECTOR -->
+        <div class="grid grid-cols-4 gap-2 mb-6">
+            <button onclick="setBot('seven')" id="b-seven" class="btn-active glass p-3 rounded-xl text-[8px] font-black uppercase">Seven</button>
+            <button onclick="setBot('flash')" id="b-flash" class="glass text-slate-500 p-3 rounded-xl text-[8px] font-black uppercase">Flash</button>
+            <button onclick="setBot('parity')" id="b-parity" class="glass text-slate-500 p-3 rounded-xl text-[8px] font-black uppercase">Parity</button>
+            <button onclick="setBot('differ')" id="b-differ" class="glass text-slate-500 p-3 rounded-xl text-[8px] font-black uppercase">Differ</button>
+        </div>
+
+        <!-- Control Console -->
+        <div class="glass p-6 space-y-4 shadow-xl border-t border-emerald-500/20">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800">
+                    <label class="text-[8px] font-bold text-slate-500 uppercase block mb-1">Stake ($)</label>
+                    <input type="number" id="stake" value="1" class="bg-transparent text-xl font-black text-white w-full outline-none" />
+                </div>
+                <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800">
+                    <label class="text-[8px] font-bold text-slate-500 uppercase block mb-1">Martingale</label>
+                    <input type="number" id="mart" value="2.1" step="0.1" class="bg-transparent text-xl font-black text-white w-full outline-none" />
+                </div>
+            </div>
+
+            <div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800">
+                <label class="text-[8px] font-bold text-slate-500 uppercase block mb-1">V-Loss Limit (Accuracy)</label>
+                <input type="number" id="vlimit" value="3" class="bg-transparent text-xl font-black text-white w-full outline-none" />
+            </div>
+
+            <input type="password" id="token" placeholder="Paste Deriv API Token" class="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-4 text-emerald-400 font-mono text-xs focus:border-emerald-500 outline-none" />
+            
+            <button onclick="toggleEngine()" id="main-btn" class="w-full bg-emerald-500 text-white py-5 rounded-3xl font-black text-lg shadow-xl shadow-emerald-500/20 active:scale-95 transition-all uppercase">Run Mega Engine</button>
+        </div>
+
+        <!-- Execution Logs -->
+        <div id="logs" class="mt-4 bg-black/40 rounded-xl p-4 h-32 overflow-y-auto font-mono text-[9px] text-slate-600 space-y-1">
+            > Mega Dashboard Loaded. Identity: Guest 36542<br>
